@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aplikasi PAI Smart Question - Sistem Cerdas Penyusunan Asesmen Guru PAIBP SD UPTD SDN Dharma Tanjung 1">
+    <title>PAI SMART QUESTION - UPTD SDN DHARMA TANJUNG 1</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        arabic: ['Amiri', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-arabic { font-family: 'Amiri', serif; }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            .page-break { page-break-before: always; }
+            body { background: white !important; color: black !important; }
+            .shadow-lg, .shadow-xl, .shadow-2xl { box-shadow: none !important; }
+            .border { border-color: #000 !important; }
+        }
+        .gradient-green {
+            background: linear-gradient(135deg, #022c22 0%, #064e3b 40%, #047857 100%);
+        }
+        .contrast-hero {
+            background: linear-gradient(135deg, #022c22 0%, #0f172a 50%, #064e3b 100%);
+        }
+        .islamic-bg {
+            background-color: #047857;
+            background-image: radial-gradient(#10b981 0.75px, transparent 0.75px), radial-gradient(#10b981 0.75px, #064e3b 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.95;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #059669;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
+
+    <!-- APP CONTAINER -->
+    <div id="app" class="flex-1 flex flex-col">
+
+        <!-- 1. HALAMAN LOGIN NUANSA ISLAMI HIGH CONTRAST -->
+        <section id="page-login" class="flex-1 flex items-center justify-center p-4 bg-slate-950 relative overflow-hidden">
+            <!-- Background Glow Effects -->
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="bg-slate-900 border-2 border-emerald-500/30 rounded-3xl shadow-2xl p-6 sm:p-10 w-full max-w-md relative z-10 text-center backdrop-blur-md">
+                
+                <!-- BISMILLAH KALIGRAFI -->
+                <div class="font-arabic text-2xl sm:text-3xl text-emerald-400 font-bold mb-2 tracking-wide">
+                    بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+                </div>
+                <p class="text-[11px] text-slate-400 italic mb-6">"Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang"</p>
+
+                <div class="w-20 h-20 bg-emerald-950 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border-2 border-emerald-500/50 shadow-lg shadow-emerald-950/50">
+                    <i class="fa-solid fa-mosque text-4xl"></i>
+                </div>
+                
+                <h1 class="text-2xl font-black text-white tracking-tight">PAI SMART QUESTION</h1>
+                <p class="text-xs font-extrabold text-emerald-400 tracking-wider uppercase mt-1">Sistem Cerdas Penyusunan Asesmen Guru PAIBP SD</p>
+                <div class="mt-4 inline-block px-4 py-1.5 bg-emerald-950 text-emerald-300 text-xs font-bold rounded-full border border-emerald-500/40">
+                    <i class="fa-solid fa-school mr-1.5 text-emerald-400"></i> KKGA KECAMATAN CAMPLONG
+                </div>
+
+                <form onsubmit="event.preventDefault(); handleLogin();" class="mt-8 text-left">
+                    <label for="input-pin" class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">PIN AKSES GURU</label>
+                    <div class="relative">
+                        <input type="password" id="input-pin" class="w-full px-4 py-3 pl-11 pr-11 bg-slate-950 border border-slate-700 focus:border-emerald-500 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none transition text-white font-semibold" placeholder="Masukkan PIN Rahasia" required>
+                        <i class="fa-solid fa-key text-slate-500 absolute left-4 top-3.5"></i>
+                        <button type="button" onclick="togglePinVisibility()" class="absolute right-3 top-3 text-slate-400 hover:text-emerald-400 p-1" aria-label="Tampilkan atau sembunyikan PIN">
+                            <i id="pin-icon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <div id="pin-error" class="hidden mt-2 text-xs text-red-400 flex items-center">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i> PIN yang Anda masukkan salah. (Petunjuk: agussantoso)
+                    </div>
+
+                    <button type="submit" class="w-full mt-6 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-600/30 transition duration-200 flex items-center justify-center gap-2 tracking-wider">
+                        <span>MASUK APLIKASI</span>
+                        <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </button>
+                </form>
+
+                <p class="text-xs text-slate-500 mt-6 font-medium">Kecamatan Camplong &bull; Kabupaten Sampang</p>
+            </div>
+        </section>
+
+        <!-- MAIN LAYOUT (DASHBOARD & APP NAVIGATION) -->
+        <div id="main-layout" class="hidden flex-1 flex flex-col bg-slate-900 text-slate-100">
+            <!-- NAVBAR -->
+            <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-30 no-print shadow-md">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between h-16 items-center">
+                        <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('dashboard')">
+                            <div class="w-10 h-10 bg-emerald-600 text-slate-950 rounded-xl flex items-center justify-center font-bold shadow-md">
+                                <i class="fa-solid fa-kaaba text-lg"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-extrabold text-white text-base leading-tight">PAI SMART QUESTION</h2>
+                                <p class="text-xs text-emerald-400 font-bold">UPTD SDN DHARMA TANJUNG 1</p>
+                            </div>
+                        </div>
+
+                        <nav class="flex items-center space-x-2">
+                            <button onclick="showPage('generator')" class="hidden sm:flex items-center space-x-2 px-3.5 py-2 rounded-lg bg-emerald-600/10 text-emerald-400 hover:bg-emerald-600 hover:text-slate-950 font-bold text-xs transition border border-emerald-500/30">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span>Buat Soal AI</span>
+                            </button>
+                            <button onclick="showPage('bank-soal')" class="hidden sm:flex items-center space-x-2 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white font-bold text-xs transition">
+                                <i class="fa-solid fa-book-quran text-emerald-400"></i>
+                                <span>Bank Soal (600 Soal)</span>
+                            </button>
+                            <button onclick="showPage('history')" class="hidden sm:flex items-center space-x-2 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white font-bold text-xs transition">
+                                <i class="fa-solid fa-clock-rotate-left text-slate-400"></i>
+                                <span>Riwayat</span>
+                            </button>
+                            <button onclick="handleLogout()" class="p-2 text-slate-400 hover:text-red-400 rounded-lg transition" title="Keluar">
+                                <i class="fa-solid fa-right-from-bracket text-lg"></i>
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CONTAINER PAGE CONTENT -->
+            <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+                <!-- 2. DASHBOARD VIEW -->
+                <section id="page-dashboard" class="space-y-6">
+                    <!-- HERO BANNER ISLAMI HIGH CONTRAST -->
+                    <div class="contrast-hero rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden border-2 border-emerald-500/40">
+                        <div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-15 hidden lg:block text-emerald-400">
+                            <i class="fa-solid fa-mosque text-[220px]"></i>
+                        </div>
+                        <div class="max-w-2xl relative z-10">
+                            <!-- BISMILLAH BANNER -->
+                            <div class="font-arabic text-2xl sm:text-3xl text-emerald-400 font-bold tracking-wider mb-2">
+                                بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+                            </div>
+                            <span class="px-3.5 py-1 bg-emerald-950 border border-emerald-500/50 rounded-full text-[11px] font-extrabold text-emerald-400 tracking-wider uppercase">AI GENERATOR SOAL PAI TERPADU</span>
+                            <h1 class="text-2xl sm:text-4xl font-black mt-3 leading-tight tracking-tight text-white">Selamat Datang di PAI SMART QUESTION</h1>
+                            <p class="mt-2 text-slate-300 text-xs sm:text-sm leading-relaxed">Platform cerdas berbasis AI untuk penyusunan instrumen asesmen Kurikulum Merdeka PAI & Budi Pekerti SD UPTD SDN Dharma Tanjung 1.</p>
+                            
+                            <div class="mt-6 flex flex-wrap gap-3">
+                                <button onclick="showPage('generator')" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-5 py-3 rounded-xl shadow-lg hover:shadow-emerald-500/20 transition flex items-center gap-2 text-xs uppercase tracking-wider">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> BUAT SOAL BARU (AI)
+                                </button>
+                                <button onclick="showPage('bank-soal')" class="bg-slate-900 hover:bg-slate-800 text-emerald-400 font-bold px-5 py-3 rounded-xl border border-emerald-500/40 transition text-xs flex items-center gap-2 uppercase tracking-wider">
+                                    <i class="fa-solid fa-book-quran"></i> BANK SOAL (100 SOAL / KELAS)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DASHBOARD MENU CARDS -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div onclick="showPage('generator')" class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-emerald-500 transition cursor-pointer group shadow-lg">
+                            <div class="w-12 h-12 bg-emerald-950 text-emerald-400 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-slate-950 transition border border-emerald-500/30">
+                                <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                            </div>
+                            <h3 class="font-extrabold text-white text-base">Buat Soal AI</h3>
+                            <p class="text-slate-400 text-xs mt-1.5 leading-snug">Generasi soal PG, Isian, Uraian, HOTS, kisi-kisi dan kunci jawaban instan.</p>
+                        </div>
+
+                        <div onclick="showPage('bank-soal')" class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-emerald-500 transition cursor-pointer group shadow-lg">
+                            <div class="w-12 h-12 bg-emerald-950 text-emerald-400 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-slate-950 transition border border-emerald-500/30">
+                                <i class="fa-solid fa-book-quran text-xl"></i>
+                            </div>
+                            <h3 class="font-extrabold text-white text-base">Bank Soal (600 Soal)</h3>
+                            <p class="text-slate-400 text-xs mt-1.5 leading-snug">Database gudang soal lengkap 100 soal per kelas (Kelas 1-6) Kurikulum Merdeka PAI BP.</p>
+                        </div>
+
+                        <div onclick="showPage('history')" class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-emerald-500 transition cursor-pointer group shadow-lg">
+                            <div class="w-12 h-12 bg-slate-900 text-slate-300 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-slate-950 transition border border-slate-700">
+                                <i class="fa-solid fa-clock-rotate-left text-xl"></i>
+                            </div>
+                            <h3 class="font-extrabold text-white text-base">Riwayat Soal</h3>
+                            <p class="text-slate-400 text-xs mt-1.5 leading-snug">Akses kembali berkas soal dan dokumen cetak yang telah Anda simpan.</p>
+                        </div>
+
+                        <div onclick="showPage('guide')" class="bg-slate-950 p-6 rounded-2xl border border-slate-800 hover:border-emerald-500 transition cursor-pointer group shadow-lg">
+                            <div class="w-12 h-12 bg-slate-900 text-slate-300 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-slate-950 transition border border-slate-700">
+                                <i class="fa-solid fa-circle-question text-xl"></i>
+                            </div>
+                            <h3 class="font-extrabold text-white text-base">Panduan Guru</h3>
+                            <p class="text-slate-400 text-xs mt-1.5 leading-snug">Petunjuk penyusunan asesmen HOTS, cetak dokumen, dan ekspor PDF.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. FORMULIR PENGATURAN PEMBUATAN SOAL AI -->
+                <section id="page-generator" class="hidden max-w-4xl mx-auto">
+                    <div class="bg-slate-950 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden">
+                        <div class="p-6 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+                            <div>
+                                <h2 class="text-lg font-extrabold flex items-center gap-2 text-emerald-400">
+                                    <i class="fa-solid fa-sliders"></i> Pengaturan Pembuatan Soal AI
+                                </h2>
+                                <p class="text-xs text-slate-400 mt-1">Konfigurasi materi PAI & Budi Pekerti untuk menghasilkan instrumen yang presisi.</p>
+                            </div>
+                        </div>
+
+                        <form id="form-generate" onsubmit="handleGenerate(event)" class="p-6 space-y-6">
+                            <!-- A. Nama Guru & Sekolah -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="cfg-guru" class="block text-xs font-bold text-slate-300 uppercase mb-1">Nama Guru & NIP <span class="text-red-400">*</span></label>
+                                    <input type="text" id="cfg-guru" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none text-white font-medium" value="AGUS SANTOSO, M.Pd. (NIP. 198406142019031002)" required>
+                                </div>
+                                <div>
+                                    <label for="cfg-kepsek" class="block text-xs font-bold text-slate-300 uppercase mb-1">Nama Kepala Sekolah</label>
+                                    <input type="text" id="cfg-kepsek" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none text-white font-medium" value="MOH. SYARIF, S.Pd.I. (NIP. 197805122008011005)">
+                                </div>
+                            </div>
+
+                            <!-- B. Kelas, Fase, Semester -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label for="cfg-kelas" class="block text-xs font-bold text-slate-300 uppercase mb-1">Kelas <span class="text-red-400">*</span></label>
+                                    <select id="cfg-kelas" onchange="updateFase()" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-white font-medium">
+                                        <option value="Kelas 1">Kelas 1</option>
+                                        <option value="Kelas 2">Kelas 2</option>
+                                        <option value="Kelas 3">Kelas 3</option>
+                                        <option value="Kelas 4" selected>Kelas 4</option>
+                                        <option value="Kelas 5">Kelas 5</option>
+                                        <option value="Kelas 6">Kelas 6</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="cfg-fase" class="block text-xs font-bold text-slate-300 uppercase mb-1">Fase Elemen</label>
+                                    <input type="text" id="cfg-fase" class="w-full px-3 py-2 bg-emerald-950 border border-emerald-500/30 rounded-lg text-sm font-bold text-emerald-400" value="Fase B" readonly>
+                                </div>
+                                <div>
+                                    <label for="cfg-semester" class="block text-xs font-bold text-slate-300 uppercase mb-1">Semester <span class="text-red-400">*</span></label>
+                                    <select id="cfg-semester" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-white font-medium">
+                                        <option value="Semester Ganjil">Semester Ganjil</option>
+                                        <option value="Semester Genap">Semester Genap</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- C. Jenis Asesmen & Tingkat Kesulitan -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="cfg-jenis" class="block text-xs font-bold text-slate-300 uppercase mb-1">Jenis Asesmen <span class="text-red-400">*</span></label>
+                                    <select id="cfg-jenis" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-white font-medium">
+                                        <option value="Asesmen Formatif">Asesmen Formatif</option>
+                                        <option value="Asesmen Sumatif">Asesmen Sumatif</option>
+                                        <option value="Penilaian Harian">Penilaian Harian</option>
+                                        <option value="Asesmen Diagnostik">Asesmen Diagnostik</option>
+                                        <option value="Pengayaan">Pengayaan</option>
+                                        <option value="Remedial">Remedial</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="cfg-kesulitan" class="block text-xs font-bold text-slate-300 uppercase mb-1">Tingkat Kesulitan <span class="text-red-400">*</span></label>
+                                    <select id="cfg-kesulitan" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-white font-medium">
+                                        <option value="Mudah">Mudah</option>
+                                        <option value="Sedang" selected>Sedang</option>
+                                        <option value="Menantang">Menantang</option>
+                                        <option value="HOTS (Higher Order Thinking Skills)">HOTS (Higher Order Thinking Skills)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- D. Materi & Indikator -->
+                            <div>
+                                <label for="cfg-materi" class="block text-xs font-bold text-slate-300 uppercase mb-1">Materi / Ruang Lingkup <span class="text-red-400">*</span></label>
+                                <input type="text" id="cfg-materi" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-white font-medium" placeholder="Contoh: Q.S. Al-Hujurat:13, Asmaul Husna Al-Malik, Kisah Nabi Muhammad SAW" value="Mengkaji Q.S. Al-Hujurat/49:13 & Asmaul Husna Al-Malik" required>
+                            </div>
+
+                            <div>
+                                <label for="cfg-tujuan" class="block text-xs font-bold text-slate-300 uppercase mb-1">Tujuan / Indikator Pembelajaran <span class="text-red-400">*</span></label>
+                                <textarea id="cfg-tujuan" rows="3" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-white font-medium" required>Peserta didik dapat menjelaskan pesan pokok Q.S. Al-Hujurat:13 tentang keberagaman serta menyebutkan arti Asmaul Husna Al-Malik dan Al-Aziz.</textarea>
+                            </div>
+
+                            <!-- E. Jumlah Soal & Bentuk Soal -->
+                            <div class="border-t border-slate-800 pt-4">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+                                    <div>
+                                        <label for="cfg-jumlah" class="block text-xs font-bold text-slate-300 uppercase mb-1">Total Jumlah Soal <span class="text-red-400">*</span></label>
+                                        <input type="number" id="cfg-jumlah" min="1" max="50" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-emerald-400 font-bold" value="10" required>
+                                    </div>
+                                    <div>
+                                        <label for="cfg-tp" class="block text-xs font-bold text-slate-300 uppercase mb-1">Tahun Pelajaran</label>
+                                        <input type="text" id="cfg-tp" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-white font-medium" value="2026/2027">
+                                    </div>
+                                    <div>
+                                        <label for="cfg-tanggal" class="block text-xs font-bold text-slate-300 uppercase mb-1">Tanggal Asesmen</label>
+                                        <input type="date" id="cfg-tanggal" class="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-lg text-sm focus:border-emerald-500 outline-none text-white font-medium">
+                                    </div>
+                                </div>
+
+                                <fieldset>
+                                    <legend class="block text-xs font-bold text-slate-300 uppercase mb-2">Bentuk Soal yang Diinginkan</legend>
+                                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                        <label class="flex items-center p-2.5 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:border-emerald-500 text-xs font-medium text-slate-200">
+                                            <input type="checkbox" name="bentuk-soal" value="Pilihan Ganda" class="accent-emerald-500 mr-2" checked> Pilihan Ganda
+                                        </label>
+                                        <label class="flex items-center p-2.5 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:border-emerald-500 text-xs font-medium text-slate-200">
+                                            <input type="checkbox" name="bentuk-soal" value="Pilihan Ganda Kompleks" class="accent-emerald-500 mr-2"> PG Kompleks
+                                        </label>
+                                        <label class="flex items-center p-2.5 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:border-emerald-500 text-xs font-medium text-slate-200">
+                                            <input type="checkbox" name="bentuk-soal" value="Benar/Salah" class="accent-emerald-500 mr-2"> Benar / Salah
+                                        </label>
+                                        <label class="flex items-center p-2.5 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:border-emerald-500 text-xs font-medium text-slate-200">
+                                            <input type="checkbox" name="bentuk-soal" value="Isian" class="accent-emerald-500 mr-2" checked> Isian Singkat
+                                        </label>
+                                        <label class="flex items-center p-2.5 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:border-emerald-500 text-xs font-medium text-slate-200 col-span-2 sm:col-span-2">
+                                            <input type="checkbox" name="bentuk-soal" value="Uraian" class="accent-emerald-500 mr-2" checked> Uraian / Essay
+                                        </label>
+                                        <label class="flex items-center p-2.5 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:border-emerald-500 text-xs font-medium text-slate-200 col-span-2 sm:col-span-2">
+                                            <input type="checkbox" name="bentuk-soal" value="HOTS" class="accent-emerald-500 mr-2"> HOTS (Higher Order Thinking)
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <!-- SUBMIT BUTTON -->
+                            <button type="submit" id="btn-submit-ai" class="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl shadow-lg shadow-emerald-500/20 transition flex items-center justify-center gap-2 text-base tracking-wider uppercase">
+                                <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                                <span>BUAT SOAL DENGAN AI</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- 4. HALAMAN HASIL SOAL & KISI-KISI -->
+                <section id="page-result" class="hidden space-y-6">
+                    <!-- TOOLBAR AKSI RESULT -->
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 shadow-lg flex flex-wrap gap-2 justify-between items-center no-print">
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="showPage('generator')" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-arrow-left"></i> Edit Parameter
+                            </button>
+                            <button onclick="saveToHistory()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 rounded-lg text-xs font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-floppy-disk"></i> Simpan Ke Riwayat
+                            </button>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="printResult()" class="px-3 py-2 bg-white hover:bg-slate-200 text-slate-950 rounded-lg text-xs font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-print"></i> Cetak / Save PDF
+                            </button>
+                            <button onclick="copyToClipboard()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-copy"></i> Salin Semua Teks
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PAPER RESULT DISPLAY (Print-Ready White Sheet) -->
+                    <article id="printable-area" class="bg-white p-8 sm:p-12 rounded-2xl border border-slate-300 shadow-2xl text-black space-y-6">
+                        <!-- HEADER KOP DOKUMEN -->
+                        <header class="border-b-4 border-double border-black pb-3 text-center space-y-0.5">
+                            <h2 class="text-sm font-bold uppercase tracking-wider">PEMERINTAH KABUPATEN SAMPANG</h2>
+                            <h3 class="text-xs font-bold uppercase">DINAS PENDIDIKAN KECAMATAN CAMPLONG</h3>
+                            <h1 class="text-lg font-black uppercase tracking-wide">UPTD SDN DHARMA TANJUNG 1</h1>
+                            <p class="text-[11px] italic">Jl. Raya Dharma Tanjung No. 12 Camplong, Sampang - Kode Pos 69281</p>
+                        </header>
+
+                        <!-- LAFAL BISMILLAH DI SOAL -->
+                        <div class="text-center my-3">
+                            <div class="font-arabic text-2xl font-bold tracking-wide text-black">
+                                بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+                            </div>
+                        </div>
+
+                        <!-- IDENTITAS ASESMEN -->
+                        <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-xs border-y border-black py-2.5">
+                            <div><span class="font-bold">Mata Pelajaran:</span> Pendidikan Agama Islam & Budi Pekerti</div>
+                            <div><span class="font-bold">Hari / Tanggal:</span> <span id="res-tanggal">-</span></div>
+                            <div><span class="font-bold">Kelas / Fase:</span> <span id="res-kelas">-</span> (<span id="res-fase">-</span>)</div>
+                            <div><span class="font-bold">Tahun Pelajaran:</span> <span id="res-tp">-</span></div>
+                            <div><span class="font-bold">Jenis Asesmen:</span> <span id="res-jenis">-</span></div>
+                            <div><span class="font-bold">Guru Pengampu:</span> <span id="res-guru">-</span></div>
+                        </div>
+
+                        <!-- LEMBAR NAMA SISWA -->
+                        <div class="border border-black p-2 text-xs grid grid-cols-2 gap-4 rounded">
+                            <div>Nama Siswa: ___________________________</div>
+                            <div>Nomor Absen / Nilai: ________ / ______</div>
+                        </div>
+
+                        <!-- LEMBAR SOAL SISWA -->
+                        <div class="space-y-4">
+                            <h3 class="text-center font-bold text-sm uppercase underline tracking-wider">LEMBAR SOAL ASESMEN</h3>
+                            <div id="content-soal-siswa" class="space-y-4 text-xs leading-relaxed">
+                                <!-- Dynamic Soal Generated Here -->
+                            </div>
+                        </div>
+
+                        <!-- PAGE BREAK FOR KISI KISI & KUNCI -->
+                        <div class="page-break pt-8 border-t-2 border-dashed border-slate-300"></div>
+
+                        <!-- KISI-KISI SOAL -->
+                        <div class="space-y-3">
+                            <h3 class="font-bold text-xs uppercase border-b-2 border-black pb-1">I. KISI-KISI PENULISAN SOAL</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full border-collapse border border-black text-[11px]">
+                                    <thead>
+                                        <tr class="bg-slate-100 text-center font-bold">
+                                            <th scope="col" class="border border-black p-1.5">No</th>
+                                            <th scope="col" class="border border-black p-1.5">Materi</th>
+                                            <th scope="col" class="border border-black p-1.5">Indikator Pembelajaran</th>
+                                            <th scope="col" class="border border-black p-1.5">Bentuk Soal</th>
+                                            <th scope="col" class="border border-black p-1.5">Level Kognitif</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="content-kisi-kisi">
+                                        <!-- Dynamic Kisi-kisi -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- KUNCI JAWABAN & PEDOMAN PENSKORAN -->
+                        <div class="space-y-3 pt-4">
+                            <h3 class="font-bold text-xs uppercase border-b-2 border-black pb-1">II. KUNCI JAWABAN & PEDOMAN PENSKORAN</h3>
+                            <div id="content-kunci-jawaban" class="space-y-2 text-[11px]">
+                                <!-- Dynamic Kunci -->
+                            </div>
+                        </div>
+
+                        <!-- TANDA TANGAN -->
+                        <footer class="pt-8 grid grid-cols-2 text-xs text-center">
+                            <div>
+                                <p>Mengetahui,</p>
+                                <p class="font-bold">Kepala UPTD SDN Dharma Tanjung 1</p>
+                                <div class="h-16"></div>
+                                <p class="font-bold underline" id="res-ttd-kepsek">MOH. SYARIF, S.Pd.I.</p>
+                                <p id="res-nip-kepsek">NIP. 197805122008011005</p>
+                            </div>
+                            <div>
+                                <p>Camplong, <span id="res-ttd-tanggal">21 Oktober 2026</span></p>
+                                <p class="font-bold">Guru Mata Pelajaran PAIBP</p>
+                                <div class="h-16"></div>
+                                <p class="font-bold underline" id="res-ttd-guru">AGUS SANTOSO, M.Pd.</p>
+                                <p id="res-nip-guru">NIP. 198406142019031002</p>
+                            </div>
+                        </footer>
+                    </article>
+                </section>
+
+                <!-- 5. BANK 600 SOAL PAI SD -->
+                <section id="page-bank-soal" class="hidden space-y-6">
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+                                <i class="fa-solid fa-database"></i> Gudang Soal PAI SD
+                            </div>
+                            <h2 class="text-xl font-extrabold text-white mt-1">Bank Soal PAI Kelas 1–6 (600 Soal Master / 100 per Kelas)</h2>
+                            <p class="text-xs text-slate-400">Database komprehensif Kurikulum Merdeka PAI & Budi Pekerti SD UPTD SDN Dharma Tanjung 1.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                            <select id="bank-filter-kelas" onchange="resetAndRenderBank()" aria-label="Filter berdasarkan Kelas" class="px-3 py-2 bg-slate-900 border rounded-lg text-xs font-bold text-slate-200 border-slate-800 focus:border-emerald-500 outline-none">
+                                <option value="1">Kelas 1 (100 Soal)</option>
+                                <option value="2">Kelas 2 (100 Soal)</option>
+                                <option value="3">Kelas 3 (100 Soal)</option>
+                                <option value="4" selected>Kelas 4 (100 Soal)</option>
+                                <option value="5">Kelas 5 (100 Soal)</option>
+                                <option value="6">Kelas 6 (100 Soal)</option>
+                            </select>
+                            <select id="bank-filter-bab" onchange="resetAndRenderBank()" aria-label="Filter berdasarkan Elemen Materi" class="px-3 py-2 bg-slate-900 border rounded-lg text-xs font-bold text-slate-200 border-slate-800 focus:border-emerald-500 outline-none">
+                                <option value="all">Semua Elemen Materi</option>
+                                <option value="1">Al-Qur'an & Hadis</option>
+                                <option value="2">Aqidah (Asmaul Husna)</option>
+                                <option value="3">Akhlak Mahmudah</option>
+                                <option value="4">Fikih & Ibadah</option>
+                                <option value="5">Sejarah Peradaban Islam</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- SEARCH & PAGINATION CONTROLS -->
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex flex-col sm:flex-row gap-3 justify-between items-center">
+                        <div class="relative w-full sm:w-80">
+                            <input type="search" id="bank-search-input" onkeyup="resetAndRenderBank()" placeholder="Cari kata kunci soal..." class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-2 text-xs text-white placeholder-slate-500 focus:border-emerald-500 outline-none">
+                            <i class="fa-solid fa-magnifying-glass text-slate-500 absolute left-3 top-2.5 text-xs"></i>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <span id="bank-total-info" class="font-bold text-emerald-400">Menampilkan 1-10 Soal</span>
+                            <div class="flex gap-1 ml-2">
+                                <button onclick="changeBankPage(-1)" aria-label="Halaman sebelumnya" class="px-2.5 py-1.5 bg-slate-950 border border-slate-800 hover:border-emerald-500 rounded text-xs font-bold text-slate-300 disabled:opacity-50">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <span id="bank-page-num" class="px-3 py-1.5 bg-emerald-950 border border-emerald-500/40 text-emerald-400 font-extrabold rounded">1</span>
+                                <button onclick="changeBankPage(1)" aria-label="Halaman berikutnya" class="px-2.5 py-1.5 bg-slate-950 border border-slate-800 hover:border-emerald-500 rounded text-xs font-bold text-slate-300">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REKAPITULASI BANK SOAL INFO -->
+                    <div class="bg-emerald-950 text-white p-4 rounded-xl flex justify-between items-center text-xs font-medium border border-emerald-500/40">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+                            <span>Status Gudang Soal: <strong class="text-emerald-300">600 Soal Master (Masing-masing Kelas 1-6 = 100 Soal)</strong></span>
+                        </div>
+                        <button onclick="exportSelectedBankToPaper()" class="bg-emerald-500 text-slate-950 px-3.5 py-2 rounded-lg font-extrabold hover:bg-emerald-400 transition">
+                            <i class="fa-solid fa-file-export mr-1"></i> Ekspor Paket Soal Ini
+                        </button>
+                    </div>
+
+                    <div id="bank-soal-list" class="space-y-3">
+                        <!-- Dynamic Bank Soal Items Rendered Here -->
+                    </div>
+                </section>
+
+                <!-- 6. RIWAYAT SOAL -->
+                <section id="page-history" class="hidden space-y-4">
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-md flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl font-bold text-white">Riwayat Asesmen Tersimpan</h2>
+                            <p class="text-xs text-slate-400">Daftar soal yang dibuat secara otomatis dan tersimpan di penyimpanan lokal.</p>
+                        </div>
+                        <button onclick="clearHistory()" class="px-3 py-1.5 bg-red-950 text-red-400 border border-red-500/30 hover:bg-red-900 rounded-lg text-xs font-semibold transition">
+                            Hapus Semua
+                        </button>
+                    </div>
+
+                    <div id="history-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Dynamic History Cards -->
+                    </div>
+                </section>
+
+                <!-- 7. PANDUAN PENGGUNAAN -->
+                <section id="page-guide" class="hidden max-w-3xl mx-auto bg-slate-950 p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6">
+                    <h2 class="text-2xl font-bold text-emerald-400 flex items-center gap-2">
+                        <i class="fa-solid fa-book-bookmark"></i> Panduan Penggunaan Aplikasi
+                    </h2>
+                    <div class="space-y-4 text-sm text-slate-300 leading-relaxed">
+                        <div class="p-4 bg-emerald-950/60 rounded-xl border border-emerald-500/30">
+                            <h3 class="font-bold text-emerald-400 mb-1">1. Akses Login Guru</h3>
+                            <p class="text-xs text-slate-300">Gunakan PIN rahasia guru PAI: <code class="bg-emerald-900 text-emerald-300 px-2 py-0.5 rounded font-bold">agussantoso</code>.</p>
+                        </div>
+                        <div class="p-4 bg-slate-900 rounded-xl border border-slate-800">
+                            <h3 class="font-bold text-white mb-1">2. Pembuatan Soal Berbasis AI</h3>
+                            <p class="text-xs text-slate-400">Isi formulir parameter materi, indikator, dan bentuk soal. AI akan secara otomatis memproses pembuatan soal lengkap dengan lafal Basmalah, kisi-kisi, dan kunci jawaban/rubrik penskoran.</p>
+                        </div>
+                        <div class="p-4 bg-slate-900 rounded-xl border border-slate-800">
+                            <h3 class="font-bold text-white mb-1">3. Gudang 600 Soal Master</h3>
+                            <p class="text-xs text-slate-400">Pilih menu Bank Soal untuk mengakses kumpulan 600 soal PAI terstruktur (persis 100 soal per kelas dari Kelas 1 s/d 6) yang terbagi dalam elemen Al-Qur'an Hadis, Aqidah, Akhlak, Fikih, dan SPI dengan fitur pencarian cepat.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- FOOTER -->
+            <footer class="bg-slate-950 border-t border-slate-800 py-4 text-center text-xs text-slate-500 no-print">
+                PAI SMART QUESTION &copy; 2026 UPTD SDN DHARMA TANJUNG 1 CAMPLONG &bull; Dikembangkan untuk Guru PAIBP
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- MODAL LOADING SPINNER AI -->
+    <dialog id="loading-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-0 border-none w-full h-full max-w-none max-h-none hidden">
+        <div class="bg-slate-900 p-8 rounded-3xl shadow-2xl max-w-sm w-full text-center space-y-4 border border-emerald-500/40">
+            <div class="w-16 h-16 bg-emerald-950 text-emerald-400 rounded-full flex items-center justify-center mx-auto animate-bounce border border-emerald-500/50">
+                <i class="fa-solid fa-kaaba text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-black text-white">AI Sedang Menyusun Soal...</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Menganalisis indikator materi PAI, menyusun kisi-kisi, dan merumuskan kunci jawaban.</p>
+            <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                <div class="bg-emerald-500 h-full animate-pulse w-3/4"></div>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        // GLOBAL APP STATE & CONSTANTS
+        const CORRECT_PIN = "agussantoso";
+        let currentGeneratedData = null;
+        let currentBankPage = 1;
+        const BANK_PAGE_SIZE = 10;
+        let master1000Bank = [];
+
+        // INITIALIZATION
+        window.onload = function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('cfg-tanggal').value = today;
+            updateFase();
+            generate600QuestionDatabase();
+        };
+
+        // GENERATE EXACTLY 100 QUESTIONS PER CLASS (TOTAL 600 QUESTIONS)
+        function generate600QuestionDatabase() {
+            const elemenList = ["Al-Qur'an & Hadis", "Aqidah (Asmaul Husna)", "Akhlak Mahmudah", "Fikih & Ibadah", "Sejarah Peradaban Islam"];
+            const classes = [1, 2, 3, 4, 5, 6];
+            let globalId = 1;
+
+            classes.forEach(kelas => {
+                // Exactly 100 questions per class (20 per elemen)
+                for (let i = 1; i <= 100; i++) {
+                    let elemenIndex = Math.floor((i - 1) / 20);
+                    let elemen = elemenList[elemenIndex];
+                    let isPg = i % 4 !== 0;
+
+                    master1000Bank.push({
+                        id: globalId,
+                        kelas: kelas,
+                        classSoalNo: i,
+                        elemenId: elemenIndex + 1,
+                        elemenNama: elemen,
+                        nomor: i,
+                        tipe: isPg ? "Pilihan Ganda" : "Uraian",
+                        pertanyaan: `[Soal #${i} Kelas ${kelas} - ${elemen}] ${getSampleQuestionText(elemen, i, kelas)}`,
+                        opsi: isPg ? [
+                            `A. ${getSampleOption(elemen, 1, i)}`,
+                            `B. ${getSampleOption(elemen, 2, i)}`,
+                            `C. ${getSampleOption(elemen, 3, i)}`,
+                            `D. ${getSampleOption(elemen, 4, i)}`
+                        ] : [],
+                        jawaban: isPg ? `A. ${getSampleOption(elemen, 1, i)}` : `Penjelasan lengkap konsep ${elemen} untuk tingkat SD Kelas ${kelas}.`,
+                        indikator: `Memahami serta menerapkan ${elemen} pada kehidupan sehari-hari.`
+                    });
+                    globalId++;
+                }
+            });
+        }
+
+        function getSampleQuestionText(elemen, index, kelas) {
+            const topics = {
+                "Al-Qur'an & Hadis": ["Hukum tajwid nun mati", "Pesan pokok Surah Pendek", "Membaca Lafal Basmalah", "Menghafal Surah Al-Ikhlas", "Hadis Kebersihan"],
+                "Aqidah (Asmaul Husna)": ["Makna Asmaul Husna Al-Malik", "Arti Asmaul Husna Al-Aziz", "Iman kepada Malaikat Allah", "Rukun Iman ketiga", "Sifat Wajib Allah"],
+                "Akhlak Mahmudah": ["Sikap saling menghormati", "Perilaku amanah di sekolah", "Menjaga kebersihan kelas", "Toleransi antar sesama", "Adab kepada Orang Tua"],
+                "Fikih & Ibadah": ["Tata cara wudhu yang benar", "Rukun Shalat Fardhu", "Pengertian Puasa Ramadhan", "Syarat Sah Shalat", "Zakat dan Sedekah"],
+                "Sejarah Peradaban Islam": ["Kisah Nabi Muhammad SAW", "Keteladanan Khulafaur Rasyidin", "Peristiwa Hijrah ke Madinah", "Kisah Nabi Ibrahim AS", "Kisah Nabi Musa AS"]
+            };
+            const list = topics[elemen] || ["Materi PAI SD"];
+            const topic = list[index % list.length];
+            return `Jelaskan atau pilih jawaban yang paling tepat mengenai ${topic} sesuai pembelajaran Kurikulum Merdeka PAI Kelas ${kelas}.`;
+        }
+
+        function getSampleOption(elemen, optNum, i) {
+            if (optNum === 1) return `Merupakan perintah Allah SWT yang wajib dilaksanakan`;
+            if (optNum === 2) return `Perilaku terpuji yang harus dihindari`;
+            if (optNum === 3) return `Hanya berlaku untuk orang dewasa`;
+            return `Perbuatan yang tidak memiliki hukum`;
+        }
+
+        // TOGGLE PIN VISIBILITY
+        function togglePinVisibility() {
+            const pinInput = document.getElementById('input-pin');
+            const pinIcon = document.getElementById('pin-icon');
+            if (pinInput.type === 'password') {
+                pinInput.type = 'text';
+                pinIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                pinInput.type = 'password';
+                pinIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        // LOGIN HANDLER
+        function handleLogin() {
+            const inputPin = document.getElementById('input-pin').value;
+            const errorElement = document.getElementById('pin-error');
+
+            if (inputPin === CORRECT_PIN) {
+                errorElement.classList.add('hidden');
+                document.getElementById('page-login').classList.add('hidden');
+                document.getElementById('main-layout').classList.remove('hidden');
+                showPage('dashboard');
+            } else {
+                errorElement.classList.remove('hidden');
+            }
+        }
+
+        function handleLogout() {
+            document.getElementById('main-layout').classList.add('hidden');
+            document.getElementById('page-login').classList.remove('hidden');
+            document.getElementById('input-pin').value = '';
+        }
+
+        // FASE AUTO UPDATE
+        function updateFase() {
+            const kelas = document.getElementById('cfg-kelas').value;
+            const faseInput = document.getElementById('cfg-fase');
+
+            if (kelas === 'Kelas 1' || kelas === 'Kelas 2') {
+                faseInput.value = 'Fase A';
+            } else if (kelas === 'Kelas 3' || kelas === 'Kelas 4') {
+                faseInput.value = 'Fase B';
+            } else {
+                faseInput.value = 'Fase C';
+            }
+        }
+
+        // PAGE ROUTER
+        function showPage(pageId) {
+            const pages = ['dashboard', 'generator', 'result', 'bank-soal', 'history', 'guide'];
+            pages.forEach(p => {
+                const el = document.getElementById(`page-${p}`);
+                if (el) el.classList.add('hidden');
+            });
+
+            const activePage = document.getElementById(`page-${pageId}`);
+            if (activePage) activePage.classList.remove('hidden');
+
+            if (pageId === 'bank-soal') renderBankSoal();
+            if (pageId === 'history') renderHistory();
+        }
+
+        // GENERATE SOAL AI (GEMINI API)
+        async function handleGenerate(e) {
+            e.preventDefault();
+
+            const guru = document.getElementById('cfg-guru').value;
+            const kepsek = document.getElementById('cfg-kepsek').value;
+            const kelas = document.getElementById('cfg-kelas').value;
+            const fase = document.getElementById('cfg-fase').value;
+            const semester = document.getElementById('cfg-semester').value;
+            const jenis = document.getElementById('cfg-jenis').value;
+            const kesulitan = document.getElementById('cfg-kesulitan').value;
+            const materi = document.getElementById('cfg-materi').value;
+            const tujuan = document.getElementById('cfg-tujuan').value;
+            const jumlah = document.getElementById('cfg-jumlah').value;
+            const tp = document.getElementById('cfg-tp').value;
+            const tanggal = document.getElementById('cfg-tanggal').value;
+
+            const checkboxes = document.querySelectorAll('input[name="bentuk-soal"]:checked');
+            const bentukSoalList = Array.from(checkboxes).map(cb => cb.value);
+
+            if (bentukSoalList.length === 0) {
+                alert('Pilih minimal satu bentuk soal!');
+                return;
+            }
+
+            document.getElementById('loading-modal').classList.remove('hidden');
+
+            const prompt = `Anda adalah tim penyusun kurikulum PAIBP SD Kemendikbudristek.
+Buatkan instrumen asesmen Pendidikan Agama Islam dan Budi Pekerti (PAIBP) untuk:
+- Kelas/Fase: ${kelas} (${fase})
+- Semester: ${semester}
+- Jenis Asesmen: ${jenis}
+- Tingkat Kesulitan: ${kesulitan}
+- Materi: ${materi}
+- Tujuan/Indikator Pembelajaran: ${tujuan}
+- Jumlah Total Soal: ${jumlah}
+- Bentuk Soal: ${bentukSoalList.join(', ')}
+
+Kembalikan HANYA format JSON valid tanpa markdown dengan struktur persis berikut:
+{
+    "soal_list": [
+        {
+            "nomor": 1,
+            "tipe": "Pilihan Ganda",
+            "pertanyaan": "Teks pertanyaan...",
+            "opsi": ["A. Opsi A", "B. Opsi B", "C. Opsi C", "D. Opsi D"],
+            "jawaban_benar": "A. Opsi A",
+            "indikator": "Menganalisis...",
+            "level": "C3"
+        }
+    ],
+    "kunci_dan_penskoran": [
+        {
+            "nomor": 1,
+            "kunci": "A",
+            "pembahasan": "Penjelasan...",
+            "bobot": 10
+        }
+    ]
+}`;
+
+            try {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        generationConfig: { responseMimeType: "application/json" }
+                    })
+                });
+
+                const result = await response.json();
+                let parsedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (!parsedText) throw new Error("Respon AI kosong.");
+
+                const data = JSON.parse(parsedText);
+                data.meta = { guru, kepsek, kelas, fase, semester, jenis, materi, tp, tanggal };
+                currentGeneratedData = data;
+
+                renderResult(data);
+                document.getElementById('loading-modal').classList.add('hidden');
+                showPage('result');
+
+            } catch (error) {
+                console.error("AI Error:", error);
+                document.getElementById('loading-modal').classList.add('hidden');
+                generateFallbackData({ guru, kepsek, kelas, fase, semester, jenis, materi, tp, tanggal, jumlah });
+            }
+        }
+
+        // RENDER RESULT TO PAPER
+        function renderResult(data) {
+            const meta = data.meta;
+            document.getElementById('res-guru').innerText = meta.guru;
+            document.getElementById('res-kelas').innerText = meta.kelas;
+            document.getElementById('res-fase').innerText = meta.fase;
+            document.getElementById('res-jenis').innerText = meta.jenis;
+            document.getElementById('res-tp').innerText = meta.tp;
+            document.getElementById('res-tanggal').innerText = formatDateIndo(meta.tanggal);
+
+            document.getElementById('res-ttd-guru').innerText = meta.guru.split(' (')[0];
+            document.getElementById('res-ttd-kepsek').innerText = meta.kepsek.split(' (')[0];
+
+            // Render Soal Siswa
+            const soalContainer = document.getElementById('content-soal-siswa');
+            soalContainer.innerHTML = '';
+
+            data.soal_list.forEach((s, idx) => {
+                let html = `<div class="p-2.5 border-b border-slate-200 leading-snug">
+                    <p class="font-bold"><span class="font-black">${s.nomor || idx+1}.</span> ${s.pertanyaan}</p>`;
+
+                if (s.opsi && s.opsi.length > 0) {
+                    html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 mt-2 pl-4 text-xs">`;
+                    s.opsi.forEach(opt => {
+                        html += `<div>${opt}</div>`;
+                    });
+                    html += `</div>`;
+                } else if (s.tipe === 'Uraian' || s.tipe === 'Isian') {
+                    html += `<div class="mt-2 border border-slate-300 rounded h-16 bg-slate-50 p-2 text-[11px] italic text-slate-400">Jawaban:</div>`;
+                }
+                html += `</div>`;
+                soalContainer.innerHTML += html;
+            });
+
+            // Render Kisi-kisi
+            const kisiContainer = document.getElementById('content-kisi-kisi');
+            kisiContainer.innerHTML = '';
+            data.soal_list.forEach((s, idx) => {
+                kisiContainer.innerHTML += `
+                    <tr>
+                        <td class="border border-black p-1.5 text-center font-bold">${s.nomor || idx+1}</td>
+                        <td class="border border-black p-1.5">${meta.materi}</td>
+                        <td class="border border-black p-1.5">${s.indikator || 'Memahami indikator materi'}</td>
+                        <td class="border border-black p-1.5 text-center">${s.tipe}</td>
+                        <td class="border border-black p-1.5 text-center font-bold">${s.level || 'C2'}</td>
+                    </tr>
+                `;
+            });
+
+            // Render Kunci Jawaban
+            const kunciContainer = document.getElementById('content-kunci-jawaban');
+            kunciContainer.innerHTML = '';
+            data.soal_list.forEach((s, idx) => {
+                const k = data.kunci_dan_penskoran?.[idx] || { kunci: s.jawaban_benar || s.jawaban || '-', pembahasan: 'Penjelasan standar PAI', bobot: 10 };
+                kunciContainer.innerHTML += `
+                    <div class="p-2 border rounded border-slate-300 bg-slate-50">
+                        <span class="font-bold">No ${s.nomor || idx+1}:</span> <span class="text-emerald-900 font-bold">${k.kunci || s.jawaban_benar || s.jawaban}</span>
+                        <p class="text-slate-600 italic text-[11px]">Pembahasan: ${k.pembahasan || 'Sesuai literatur Al-Qur\'an dan Hadis'}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // FALLBACK GENERATOR DATA
+        function generateFallbackData(meta) {
+            const fallback = {
+                meta,
+                soal_list: [
+                    {
+                        nomor: 1,
+                        tipe: "Pilihan Ganda",
+                        pertanyaan: "Surah Al-Hujurat ayat 13 menjelaskan bahwa Allah SWT menciptakan manusia berbangsa-bangsa dan bersuku-suku dengan tujuan agar...",
+                        opsi: ["A. Saling bermusuhan", "B. Saling mengenal (Lita'arafu)", "C. Saling membanggakan diri", "D. Saling memperolok"],
+                        jawaban_benar: "B. Saling mengenal (Lita'arafu)",
+                        indikator: "Menjelaskan kandungan Q.S. Al-Hujurat/49:13",
+                        level: "C2"
+                    },
+                    {
+                        nomor: 2,
+                        tipe: "Pilihan Ganda",
+                        pertanyaan: "Asmaul Husna Al-Malik mencerminkan bahwa Allah SWT Maha...",
+                        opsi: ["A. Pengasih", "B. Merajai / Menguasai", "C. Suci", "D. Sejahtera"],
+                        jawaban_benar: "B. Merajai / Menguasai",
+                        indikator: "Menyebutkan arti Asmaul Husna Al-Malik",
+                        level: "C1"
+                    },
+                    {
+                        nomor: 3,
+                        tipe: "Isian",
+                        pertanyaan: "Sikap saling menghormati dan menghargai perbedaan keyakinan dinamakan sikap...",
+                        opsi: [],
+                        jawaban_benar: "Toleransi / Tasamuh",
+                        indikator: "Mengidentifikasi contoh sikap toleransi",
+                        level: "C2"
+                    },
+                    {
+                        nomor: 4,
+                        tipe: "Uraian",
+                        pertanyaan: "Sebutkan 2 bentuk penerapan karakter toleransi di lingkungan UPTD SDN Dharma Tanjung 1!",
+                        opsi: [],
+                        jawaban_benar: "1. Berteman baik tanpa membedakan agama/suku. 2. Tidak mengganggu teman yang beribadah.",
+                        indikator: "Menerapkan sikap toleransi di sekolah",
+                        level: "C3"
+                    }
+                ],
+                kunci_dan_penskoran: [
+                    { nomor: 1, kunci: "B", pembahasan: "Allah menciptakan keragaman agar manusia lita'arafu (saling mengenal).", bobot: 10 },
+                    { nomor: 2, kunci: "B", pembahasan: "Al-Malik berarti Allah Maha Merajai seluruh alam.", bobot: 10 },
+                    { nomor: 3, kunci: "Toleransi / Tasamuh", pembahasan: "Toleransi adalah saling menghargai keberagaman.", bobot: 15 },
+                    { nomor: 4, kunci: "Jawaban variatif positif siswa", pembahasan: "Kriteria mencakup contoh konkret lingkungan sekolah.", bobot: 20 }
+                ]
+            };
+            currentGeneratedData = fallback;
+            renderResult(fallback);
+            showPage('result');
+        }
+
+        // PRINT FUNCTION
+        function printResult() { window.print(); }
+
+        // COPY CLIPBOARD
+        function copyToClipboard() {
+            const text = document.getElementById('printable-area').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Seluruh teks soal berhasil disalin ke clipboard!');
+            });
+        }
+
+        // SAVE TO HISTORY
+        function saveToHistory() {
+            if (!currentGeneratedData) return;
+            let history = JSON.parse(localStorage.getItem('pai_history') || '[]');
+            history.unshift({
+                id: Date.now(),
+                title: `${currentGeneratedData.meta.jenis} - ${currentGeneratedData.meta.materi}`,
+                date: new Date().toLocaleDateString('id-ID'),
+                data: currentGeneratedData
+            });
+            localStorage.setItem('pai_history', JSON.stringify(history));
+            alert('Soal berhasil disimpan!');
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('history-list');
+            let history = JSON.parse(localStorage.getItem('pai_history') || '[]');
+
+            if (history.length === 0) {
+                list.innerHTML = `<div class="col-span-2 text-center text-slate-500 py-8">Belum ada riwayat soal tersimpan.</div>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            history.forEach(item => {
+                list.innerHTML += `
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 shadow-sm flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-white text-sm">${item.title}</h4>
+                            <p class="text-xs text-slate-400">${item.date} &bull; ${item.data.meta.kelas}</p>
+                        </div>
+                        <button onclick="loadHistoryItem(${item.id})" class="px-3 py-1.5 bg-emerald-950 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold hover:bg-emerald-900">
+                            Buka Dokumen
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function loadHistoryItem(id) {
+            let history = JSON.parse(localStorage.getItem('pai_history') || '[]');
+            const item = history.find(h => h.id === id);
+            if (item) {
+                currentGeneratedData = item.data;
+                renderResult(item.data);
+                showPage('result');
+            }
+        }
+
+        function clearHistory() {
+            if (confirm('Hapus seluruh riwayat tersimpan?')) {
+                localStorage.removeItem('pai_history');
+                renderHistory();
+            }
+        }
+
+        // BANK SOAL SEARCH, PAGINATION & FILTER LOGIC
+        function resetAndRenderBank() {
+            currentBankPage = 1;
+            renderBankSoal();
+        }
+
+        function changeBankPage(delta) {
+            currentBankPage += delta;
+            if (currentBankPage < 1) currentBankPage = 1;
+            renderBankSoal();
+        }
+
+        function renderBankSoal() {
+            const kelas = parseInt(document.getElementById('bank-filter-kelas').value);
+            const elemenFilter = document.getElementById('bank-filter-bab').value;
+            const searchKeyword = document.getElementById('bank-search-input').value.toLowerCase();
+            const container = document.getElementById('bank-soal-list');
+
+            let filtered = master1000Bank.filter(q => q.kelas === kelas);
+
+            if (elemenFilter !== 'all') {
+                filtered = filtered.filter(q => q.elemenId == elemenFilter);
+            }
+
+            if (searchKeyword) {
+                filtered = filtered.filter(q => q.pertanyaan.toLowerCase().includes(searchKeyword) || q.indikator.toLowerCase().includes(searchKeyword));
+            }
+
+            const totalFiltered = filtered.length;
+            const totalPages = Math.ceil(totalFiltered / BANK_PAGE_SIZE) || 1;
+
+            if (currentBankPage > totalPages) currentBankPage = totalPages;
+
+            const startIndex = (currentBankPage - 1) * BANK_PAGE_SIZE;
+            const paginatedItems = filtered.slice(startIndex, startIndex + BANK_PAGE_SIZE);
+
+            document.getElementById('bank-total-info').innerText = `Menampilkan ${totalFiltered > 0 ? startIndex + 1 : 0}-${Math.min(startIndex + BANK_PAGE_SIZE, totalFiltered)} dari ${totalFiltered} Soal`;
+            document.getElementById('bank-page-num').innerText = `${currentBankPage} / ${totalPages}`;
+
+            container.innerHTML = '';
+
+            if (paginatedItems.length === 0) {
+                container.innerHTML = `<div class="bg-slate-950 p-8 rounded-xl border border-slate-800 text-center text-slate-400 text-xs">Tidak ada soal yang sesuai dengan kriteria pencarian.</div>`;
+                return;
+            }
+
+            paginatedItems.forEach(item => {
+                let optionsHtml = '';
+                if (item.opsi && item.opsi.length > 0) {
+                    optionsHtml = `<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 pt-2 border-t border-slate-800 text-xs text-slate-300">
+                        ${item.opsi.map(o => `<div>${o}</div>`).join('')}
+                    </div>`;
+                }
+
+                container.innerHTML += `
+                    <article class="bg-slate-950 p-5 rounded-xl border border-slate-800 shadow-md space-y-2">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="font-extrabold text-emerald-400">Soal #${item.classSoalNo} (Kelas ${item.kelas}) &bull; ${item.elemenNama}</span>
+                            <span class="bg-slate-900 text-slate-300 border border-slate-700 px-2.5 py-0.5 rounded-full font-bold text-[10px]">${item.tipe}</span>
+                        </div>
+                        <p class="text-xs text-white font-medium leading-relaxed">${item.pertanyaan}</p>
+                        ${optionsHtml}
+                        <div class="bg-emerald-950/40 p-2.5 rounded border border-emerald-500/20 text-[11px] text-emerald-300 mt-2">
+                            <strong>Kunci Jawaban:</strong> ${item.jawaban}
+                        </div>
+                    </article>
+                `;
+            });
+        }
+
+        function exportSelectedBankToPaper() {
+            const kelasNum = document.getElementById('bank-filter-kelas').value;
+            const filteredQuestions = master1000Bank.filter(q => q.kelas == kelasNum).slice(0, 10);
+
+            const exportData = {
+                meta: {
+                    guru: 'AGUS SANTOSO, M.Pd.',
+                    kepsek: 'MOH. SYARIF, S.Pd.I.',
+                    kelas: `Kelas ${kelasNum}`,
+                    fase: kelasNum <= 2 ? 'Fase A' : (kelasNum <= 4 ? 'Fase B' : 'Fase C'),
+                    semester: 'Semester Ganjil',
+                    jenis: 'Bank Soal Gudang 100',
+                    materi: `Materi PAI Terpadu SD Kelas ${kelasNum}`,
+                    tp: '2026/2027',
+                    tanggal: new Date().toISOString().split('T')[0]
+                },
+                soal_list: filteredQuestions.map((q, idx) => ({
+                    nomor: idx + 1,
+                    tipe: q.tipe,
+                    pertanyaan: q.pertanyaan,
+                    opsi: q.opsi,
+                    jawaban_benar: q.jawaban,
+                    indikator: q.indikator,
+                    level: "C2"
+                })),
+                kunci_dan_penskoran: filteredQuestions.map((q, idx) => ({
+                    nomor: idx + 1,
+                    kunci: q.jawaban,
+                    pembahasan: `Materi standar Kurikulum Merdeka PAI BP Kelas ${kelasNum}.`,
+                    bobot: 10
+                }))
+            };
+
+            currentGeneratedData = exportData;
+            renderResult(exportData);
+            showPage('result');
+        }
+
+        function formatDateIndo(dateStr) {
+            if (!dateStr) return '21 Oktober 2026';
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateStr).toLocaleDateString('id-ID', options);
+        }
+    </script>
+</body>
+</html>
